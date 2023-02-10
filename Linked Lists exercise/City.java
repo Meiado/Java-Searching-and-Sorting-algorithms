@@ -2,11 +2,11 @@ public class City {
 
 	private String name;
 
-	private City prox;
+	private City next;
 
-	public City(String name, City prox) {
+	public City(String name, City next) {
 		setName(name);
-		setProx(prox);
+		setNext(next);
 	}
 
 	public String getName() {
@@ -17,12 +17,12 @@ public class City {
 		this.name = name;
 	}
 
-	public City getProx() {
-		return this.prox;
+	public City getNext() {
+		return this.next;
 	}
 
-	public void setProx(City prox) {
-		this.prox = prox;
+	public void setNext(City next) {
+		this.next = next;
 	}
 
 }

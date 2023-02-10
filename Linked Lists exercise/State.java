@@ -4,12 +4,12 @@ public class State {
 
 	private City cities;
 
-	private State prox;
+	private State next;
 
-	public State(String name, City cities, State prox) {
+	public State(String name, City cities, State next) {
 		setName(name);
 		setCities(cities);
-		setProx(prox);		
+		setNext(next);		
 	}
 
 	public String getName() {
@@ -20,12 +20,12 @@ public class State {
 		this.name = name;
 	}
 
-	public State getProx() {
-		return this.prox;
+	public State getNext() {
+		return this.next;
 	}
 
-	public void setProx(State prox) {
-		this.prox = prox;
+	public void setNext(State next) {
+		this.next = next;
 	}
 
 	public City getCities() {
@@ -40,11 +40,11 @@ public class State {
 		if(this.getCities()!=null)
 		{
 			City aux = this.getCities();
-			while(aux.getProx()!=null && aux.getName().compareToIgnoreCase(city.getName())>0)
-				aux = aux.getProx();
-			if(aux.getProx()!=null)
-				city.setProx(aux.getProx());
-			aux.setProx(city);
+			while(aux.getNext()!=null && aux.getName().compareToIgnoreCase(city.getName())>0)
+				aux = aux.getNext();
+			if(aux.getNext()!=null)
+				city.setNext(aux.getNext());
+			aux.setNext(city);
 		}
 		else
 			setCities(city);
@@ -54,7 +54,7 @@ public class State {
 	{
 		City city = this.getCities();
 		while(city!=null && city.getName()!=name)
-			city = city.getProx();
+			city = city.getNext();
 		return city;
 	}
 }

@@ -1,19 +1,19 @@
 public class Node {
-    private Node ant;
-    private Node prox;
+    private Node prev;
+    private Node next;
     private int info;
 
-    public void setAnt(Node ant){
-        this.ant = ant;
+    public void setPrev(Node prev){
+        this.prev = prev;
     }
-    public Node getAnt(){
-        return this.ant;
+    public Node getPrev(){
+        return this.prev;
     }
-    public void setProx(Node prox){
-        this.prox = prox;
+    public void setNext(Node next){
+        this.next = next;
     }
-    public Node getProx(){
-        return this.prox;
+    public Node getNext(){
+        return this.next;
     }
     public void setInfo(int info){
         this.info = info;
@@ -21,9 +21,9 @@ public class Node {
     public int getInfo(){
         return this.info;
     }
-    public Node(Node ant, Node prox, int info){
-        setAnt(ant);
-        setProx(prox);
+    public Node(Node prev, Node next, int info){
+        setPrev(prev);
+        setNext(next);
         setInfo(info);
     }
 }

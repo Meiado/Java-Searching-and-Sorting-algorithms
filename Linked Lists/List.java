@@ -32,8 +32,8 @@ public class List {
         else
         {
             Node aux = this.getBegin();
-            aux.setAnt(node);
-            node.setProx(aux);
+            aux.setPrev(node);
+            node.setNext(aux);
         }
     }
 
@@ -47,8 +47,8 @@ public class List {
         else
         {
             Node aux = this.getEnd();
-            aux.setProx(node);
-            node.setAnt(aux);
+            aux.setNext(node);
+            node.setPrev(aux);
         }
     }
 
@@ -57,14 +57,14 @@ public class List {
         while(aux != null)
         {
             System.out.print(aux.getInfo() + "\n");
-            aux = aux.getProx();
+            aux = aux.getNext();
         }
     }
 
     public Node exhaustiveSearch(int key){
         Node node = this.getBegin();
         while(node!=null && node.getInfo()!=key)
-            node = node.getProx();
+            node = node.getNext();
         return node;
     }
 
@@ -72,26 +72,26 @@ public class List {
         Node node = this.exhaustiveSearch(key);
         if(node!=null)
         {
-            Node ant = node.getAnt(), prox = node.getProx();
-            if(ant==prox) //Nó encontrado é o único da lista -> ant e prox apontam para null => ant==prox
+            Node prev = node.getPrev(), next = node.getNext();
+            if(prev==next) //Nó encontrado é o único da lista -> prev e next apontam para null => prev==next
             {
                 this.setBegin(null);
                 this.setEnd(null);
             }
-            else if(prox==null) //Nó no fim da lista
+            else if(next==null) //Nó no fim da lista
             {
-                ant.setProx(prox);
-                this.setEnd(ant);
+                prev.setNext(next);
+                this.setEnd(prev);
             }
-            else if(ant==null)  //Nó no começo da lista
+            else if(prev==null)  //Nó no começo da lista
             {
-                prox.setAnt(ant);
-                this.setBegin(prox);
+                next.setPrev(prev);
+                this.setBegin(next);
             }
             else    //Nó no meio da lista
             {
-                prox.setAnt(ant);
-                ant.setProx(prox);
+                next.setPrev(prev);
+                prev.setNext(next);
             }
         }
     }
