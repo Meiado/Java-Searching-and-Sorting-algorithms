@@ -38,16 +38,24 @@ public class State {
 
 	public void orderedCityInsertion(City city){
 		if(this.getCities()!=null)
-		{
-			City aux = this.getCities();
-			while(aux.getNext()!=null && aux.getName().compareToIgnoreCase(city.getName())>0)
-				aux = aux.getNext();
-			if(aux.getNext()!=null)
-				city.setNext(aux.getNext());
-			aux.setNext(city);
-		}
-		else
-			setCities(city);
+        {
+            City aux = this.getCities(), prev = null;
+            while(aux!=null && aux.getName().compareTo(city.getName())<0){
+                prev = aux;
+                aux = aux.getNext();
+            } 
+            if(aux!=null){
+                if(prev==null)
+                    setCities(city);
+                else
+                    prev.setNext(city);
+                city.setNext(aux);
+            }
+            else
+                prev.setNext(city);
+        }
+        else
+            setCities(city);
 	}
 
 	public City searchCity(String name)
