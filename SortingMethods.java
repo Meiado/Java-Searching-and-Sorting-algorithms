@@ -183,5 +183,50 @@ public class SortingMethods {
         }
     }
 
-    
+    public void heapSort(int TL){
+        int TL2=TL, pai, FE, FD, maiorF, aux;
+        while(TL2>1){
+            pai = TL2/2 - 1;
+            while(pai>0){
+                FE = 2*pai + 1;
+                FD = FE + 1;
+                maiorF = FE;
+                if(FD < TL2 && vet[FD]>vet[FE])
+                    maiorF = FD;
+
+                if(vet[maiorF]>vet[pai]){
+                    aux = vet[pai];
+                    vet[pai]=vet[maiorF];
+                    vet[maiorF]=aux;
+                }
+                pai--;
+            }
+            aux = vet[0];
+            vet[0] = vet[TL2-1];
+            vet[TL2-1] = aux;
+            TL2--;
+        }
+    }
+
+    public void shellSort(int TL, int dist){
+        int aux;
+        while(dist>0){
+            for(int i=0;i<dist;i++){
+                for(int j=i;j+dist<TL;j+=dist){
+                    if(vet[j]>vet[j+dist]){
+                        aux = vet[j];
+                        vet[j] = vet[j+dist];
+                        vet[j+dist] = aux;
+
+                        for(int k=j;k-dist>=0 && vet[k]<vet[k-dist];k-=dist){
+                                aux = vet[k-dist];
+                                vet[k-dist] = vet[k];
+                                vet[k] = aux;
+                        }
+                    }
+                }
+            }
+            dist/=2;
+        }
+    }
 }
