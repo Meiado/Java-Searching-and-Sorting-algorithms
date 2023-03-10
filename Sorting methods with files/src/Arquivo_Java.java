@@ -195,10 +195,11 @@ public class Arquivo_Java {
             while(paiPos>0){
                 seekArq(2*paiPos + 1);
                 FE.leDoArq(arquivo);
-                FD.leDoArq(arquivo);
                 maior = FE;
                 maiorPos = 2*paiPos + 1;
-                if(!eof()&&FD.getCodigo()>FE.getCodigo()){
+                if(!eof()&&maiorPos+1<TL)
+                    FD.leDoArq(arquivo);                
+                if(FD!=null && FD.getCodigo()>FE.getCodigo()){
                     maior = FD;
                     maiorPos++;
                 }
