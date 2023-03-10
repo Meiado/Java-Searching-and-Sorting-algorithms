@@ -172,7 +172,7 @@ public class SortingMethods {
                 }
             }
             end--;
-            for(int i=end;i>begin;i++){
+            for(int i=end;i>begin;i--){
                 if(vet[i]<vet[i-1]){
                     aux = vet[i];
                     vet[i] = vet[i-1];

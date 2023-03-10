@@ -67,8 +67,9 @@ public class List {
     public void showCities(String stateName){
         State aux = searchState(stateName);
         if(aux!=null){
-            City auxCity = aux.getCities();
-            while(auxCity!=null)
+            CityList list = aux.getCities();
+            City auxCity
+            while(list!=null)
             {
                 System.out.println(auxCity.getName());
                 auxCity = auxCity.getNext();

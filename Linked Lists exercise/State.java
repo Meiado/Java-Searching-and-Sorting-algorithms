@@ -2,11 +2,12 @@ public class State {
 
 	private String name;
 
-	private City cities;
+	private CityList cities;
 
+	
 	private State next;
 
-	public State(String name, City cities, State next) {
+	public State(String name, CityList cities, State next) {
 		setName(name);
 		setCities(cities);
 		setNext(next);		
@@ -28,41 +29,11 @@ public class State {
 		this.next = next;
 	}
 
-	public City getCities() {
-		return this.cities;
+	public CityList getCities() {
+		return cities;
 	}
 
-	public void setCities(City cities){
+	public void setCities(CityList cities) {
 		this.cities = cities;
-	}
-
-	public void orderedCityInsertion(City city){
-		if(this.getCities()!=null)
-        {
-            City aux = this.getCities(), prev = null;
-            while(aux!=null && aux.getName().compareTo(city.getName())<0){
-                prev = aux;
-                aux = aux.getNext();
-            } 
-            if(aux!=null){
-                if(prev==null)
-                    setCities(city);
-                else
-                    prev.setNext(city);
-                city.setNext(aux);
-            }
-            else
-                prev.setNext(city);
-        }
-        else
-            setCities(city);
-	}
-
-	public City searchCity(String name)
-	{
-		City city = this.getCities();
-		while(city!=null && city.getName()!=name)
-			city = city.getNext();
-		return city;
 	}
 }

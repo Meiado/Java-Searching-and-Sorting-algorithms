@@ -155,4 +155,94 @@ public class Arquivo_Java {
             LS--;
         }
     }
+
+    public void shakeSort(){
+        int TL = filesize(), inicio = 0, fim = TL-1;
+        Registro reg1 = new Registro(), reg2 = new Registro();
+        while(inicio<fim){
+            for(int i=inicio;i<fim;i++){
+                seekArq(i);
+                reg1.leDoArq(arquivo);
+                reg2.leDoArq(arquivo);
+                if(reg1.getCodigo()>reg2.getCodigo()){
+                    seekArq(i);
+                    reg2.gravaNoArq(arquivo);
+                    reg1.gravaNoArq(arquivo);
+                }
+            }
+            fim--;
+            for(int i=fim-1;i>inicio;i-=2){
+                seekArq(i);
+                reg2.leDoArq(arquivo);
+                reg1.leDoArq(arquivo);
+                if(reg1.getCodigo()<reg2.getCodigo()){
+                    seekArq(i);
+                    reg1.gravaNoArq(arquivo);
+                    reg2.gravaNoArq(arquivo);
+                }
+            }
+            inicio++;
+        }
+    }
+
+    public void heapSort(){
+        int TL = filesize(), paiPos, maiorPos;
+        Registro maior, pai = new Registro(), FD = new Registro(), FE = new Registro();
+        while(TL>1){
+            paiPos = TL/2 - 1;
+            seekArq(paiPos);
+            pai.leDoArq(arquivo);
+            while(paiPos>0){
+                seekArq(2*paiPos + 1);
+                FE.leDoArq(arquivo);
+                FD.leDoArq(arquivo);
+                maior = FE;
+                maiorPos = 2*paiPos + 1;
+                if(!eof()&&FD.getCodigo()>FE.getCodigo()){
+                    maior = FD;
+                    maiorPos++;
+                }
+                if(maior.getCodigo()>pai.getCodigo()){
+                    seekArq(maiorPos);
+                    pai.gravaNoArq(arquivo);
+                    seekArq(paiPos);
+                    maior.gravaNoArq(arquivo);
+                }
+                paiPos--;
+                seekArq(paiPos);
+                pai.leDoArq(arquivo);
+            }
+            seekArq(0); FE.leDoArq(arquivo);
+            seekArq(TL-1);  FD.leDoArq(arquivo);
+            seekArq(0); FD.gravaNoArq(arquivo);
+            seekArq(TL-1);  FE.gravaNoArq(arquivo);
+            TL--;
+        }
+    }
+
+    public void shellSort(int dist){
+        int TL = filesize();
+        Registro reg1 = new Registro(), reg2 = new Registro();
+        while(dist>0){
+            for(int i=0;i<dist;i++){
+                for(int j=i; j+dist<TL;j+=dist){
+                    seekArq(j); reg1.leDoArq(arquivo);
+                    seekArq(j+dist); reg2.leDoArq(arquivo);
+                    if(reg1.getCodigo()>reg2.getCodigo()){
+                        seekArq(j); reg2.gravaNoArq(arquivo);
+                        seekArq(j+dist); reg1.gravaNoArq(arquivo);
+                    }
+                    for(int k=j;k-dist>=0;k-=dist){
+                        seekArq(k-dist); reg1.leDoArq(arquivo);
+                        seekArq(k); reg2.leDoArq(arquivo);
+                        if(reg1.getCodigo()>reg2.getCodigo()){
+                            seekArq(k); reg1.gravaNoArq(arquivo);
+                            seekArq(k-dist); reg2.gravaNoArq(arquivo);
+                        }
+                    }
+                }
+            }
+            dist/=2;
+        }
+    }
 }
