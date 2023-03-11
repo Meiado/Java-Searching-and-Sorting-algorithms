@@ -209,6 +209,33 @@ public class List {
     }
 
     public void heapSort(){
+        Node fim=getEnd(), pai, FE, FD, maiorF;
+        int info, paiPos, FEpos, FDpos, TL = getNumberNodes(getBegin(), getEnd());
+        while(TL>1){
+            paiPos = TL/2-1;
+            pai = setMid(getBegin(), paiPos);
+            while(pai!=null){
+                FEpos = 2*paiPos + 1;
+                FDpos = FEpos+1;
+                FE = setMid(getBegin(), FEpos);
+                maiorF = FE;
+                FD = FE.getNext();
+                if(FDpos < TL && FD.getInfo()>FE.getInfo())
+                    maiorF = FD;
+                if(maiorF.getInfo()>pai.getInfo()){
+                    info = maiorF.getInfo();
+                    maiorF.setInfo(pai.getInfo());
+                    pai.setInfo(info);
+                }
+                pai = pai.getPrev();
+                paiPos--;
+            }
+            info = fim.getInfo();
+            fim.setInfo(getBegin().getInfo());
+            getBegin().setInfo(info);
+            fim = fim.getPrev();
+            TL--;
+        }
 
     }
     public Node setNextPosition(Node start, int n){
