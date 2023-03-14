@@ -253,7 +253,7 @@ public class SortingMethods {
         if(j+1<fim)
             quickSortPL(j+1, fim);        
     }
-    
+
     public void quickSortPLF(int ini, int fim){
         int i = ini, j = fim, aux;
         boolean flag = true;
@@ -270,8 +270,8 @@ public class SortingMethods {
             flag = !flag;
         }
         if(ini<i-1)
-            quickSortPL(ini, i-1);
+            quickSortPLF(ini, i-1);
         if(j+1<fim)
-            quickSortPL(j+1, fim);        
+            quickSortPLF(j+1, fim);        
     }
 }
