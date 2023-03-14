@@ -229,4 +229,49 @@ public class SortingMethods {
             dist/=2;
         }
     }
+
+    public void quickSort(int TL){
+        quickSortPL(0, TL-1);
+    }
+
+    public void quickSortPL(int ini, int fim){
+        int i = ini, j = fim, aux;
+        while(i<j){
+            while(i<j&&vet[i]<=vet[j])
+                i++;
+            aux = vet[i];
+            vet[i] = vet[j];
+            vet[j] = aux;
+            while(i<j&&vet[j]>=vet[i])
+                j--;
+            aux = vet[j];
+            vet[j] = vet[i];
+            vet[i] = aux;
+        }
+        if(ini<i-1)
+            quickSortPL(ini, i-1);
+        if(j+1<fim)
+            quickSortPL(j+1, fim);        
+    }
+    
+    public void quickSortPLF(int ini, int fim){
+        int i = ini, j = fim, aux;
+        boolean flag = true;
+        while(i<j){
+            if(flag)
+                while(i<j&&vet[i]<=vet[j])
+                    i++;
+            else
+                while(i<j&&vet[j]>=vet[i])
+                    j--;
+            aux = vet[j];
+            vet[j] = vet[i];
+            vet[i] = aux;
+            flag = !flag;
+        }
+        if(ini<i-1)
+            quickSortPL(ini, i-1);
+        if(j+1<fim)
+            quickSortPL(j+1, fim);        
+    }
 }
